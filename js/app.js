@@ -21,12 +21,16 @@ window.addEventListener('load', () => {
           console.log(data);
           const { temp_f } = data.current;
           const { text } = data.current.condition;
-          const { name, region } = data.location;
+          const { name } = data.location;
+          const { region } = data.location;
+          
           // set the DOM elements from the API
+          
           temperatureDegree.textContent = temp_f;
           temperatureDescription.textContent = text;
-          locationTimezone.textContent = name;
-          
+          let neighborhood = name.toString();
+          let city = region.toString();
+          locationTimezone.textContent = neighborhood + ", " + city;          
         })
     });
   } 
