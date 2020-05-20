@@ -4,6 +4,7 @@ window.addEventListener('load', () => {
   let temperatureDescription = document.querySelector('.temperature-description');
   let temperatureDegree = document.querySelector('.temperature-degree');
   let locationTimezone = document.querySelector('.location-timezone');
+  let weatherIcon = document.querySelector('.weather-icon'); 
     
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(position => {
@@ -23,14 +24,21 @@ window.addEventListener('load', () => {
           const { text } = data.current.condition;
           const { name } = data.location;
           const { region } = data.location;
-          
+          const { icon } = data.current.condition;
           // set the DOM elements from the API
           
           temperatureDegree.textContent = temp_f;
           temperatureDescription.textContent = text;
+          
+          // setting the location as city, state
+          
           let neighborhood = name.toString();
           let city = region.toString();
           locationTimezone.textContent = neighborhood + ", " + city;          
+          
+          // setting the weather icon
+          weatherIcon.src = icon;
+          
         })
     });
   } 
