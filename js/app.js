@@ -5,6 +5,8 @@ window.addEventListener('load', () => {
   let temperatureDegree = document.querySelector('.temperature-degree');
   let locationTimezone = document.querySelector('.location-timezone');
   let weatherIcon = document.querySelector('.weather-icon'); 
+  let temperatureMetric = document.querySelector(".degree-section"); 
+  let temperatureSpan = document.querySelector(".degree-section span");
     
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(position => {
@@ -20,7 +22,7 @@ window.addEventListener('load', () => {
         })
         .then(data => {
           console.log(data);
-          const { temp_f } = data.current;
+          const { temp_f, temp_c } = data.current;
           const { text } = data.current.condition;
           const { name } = data.location;
           const { region } = data.location;
@@ -39,7 +41,19 @@ window.addEventListener('load', () => {
           // setting the weather icon
           weatherIcon.src = icon;
           
-        })
+          // toggle temperature to celsius/farenheit
+          temperatureMetric.addEventListener('click', () => {
+              if (temperatureSpan.textContent === "F") {
+                  temperatureSpan.textContent = "C";
+                  
+                  temperatureDegree.textContent = temp_c;
+              
+              } else {
+                  temperatureSpan.textContent = "F";
+                  temperatureDegree.textContent = temp_f;
+              }
+          });
+        });
     });
   } 
 });
