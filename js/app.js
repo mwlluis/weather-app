@@ -21,7 +21,7 @@ window.addEventListener('load', () => {
           return response.json();
         })
         .then(data => {
-          console.log(data);
+          
           const { temp_f, temp_c } = data.current;
           const { text } = data.current.condition;
           const { name } = data.location;
